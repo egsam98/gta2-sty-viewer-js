@@ -1,6 +1,6 @@
 import { materialNames } from "../constants.js";
 import { Helper } from "../helper.js";
-import { BMP } from "../bmp.js";
+import { saveBMP } from "../save.js";
 
 export class TilesPage {
     constructor(elements, sty, renderer) {
@@ -32,7 +32,7 @@ export class TilesPage {
         }
 
         document.getElementById('seltilesave').onclick = () => {
-            BMP.save(tile.bitmap, `tile_${tileID}.bmp`);
+            saveBMP(tile.bitmap, `tile_${tileID}.bmp`);
         }
     }
 

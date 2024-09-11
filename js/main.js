@@ -64,7 +64,6 @@ class Main {
                         this.log('Done!');
                         this.busy = false;
                         this.tabs.lockAllTabs(false);
-                        console.log(this);
                     });
             }, (error)=>{
                 this.log('Error while uploading: ' + error);

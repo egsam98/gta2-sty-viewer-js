@@ -1,6 +1,6 @@
 import { spriteBases } from "../constants.js";
 import { Helper } from "../helper.js";
-import { BMP } from "../bmp.js";
+import { saveJSON, saveBMP } from "../save.js";
 
 export class SpritesPage {
     constructor(elements, sty, renderer) {
@@ -26,7 +26,8 @@ export class SpritesPage {
             <b>Height:</b> ${sprite.bitmap.height} px<br>
             <b>Virtual palette:</b> sprite/${virtPal.relID}<br>
             <b>Physical palette:</b> <input type="number" id="selspriteremap" value="${virtPal.physicalPalette.id}"><br><br>
-            <button id="selspritesave">Download as BMP</button>`;
+            <button id="jsonspritesave">Download as JSON</button>
+            <button id="selspritesave">Download as PNG</button>`;
 
         this.elements.selspriteinfo.innerHTML = infoHTML;
 
@@ -37,8 +38,11 @@ export class SpritesPage {
             this.renderer.renderBitmap(this.elements.selspritecanv, sprite.bitmap, palette);
         }
 
+        document.getElementById('jsonspritesave').onclick = () => {
+            saveJSON(this.sty, sprite, `${sprite.base}_${sprite.relID}.json`);
+        }
         document.getElementById('selspritesave').onclick = () => {
-            BMP.save(sprite.bitmap, `sprite_${sprite.base}_${sprite.relID}.bmp`);
+            saveBMP(sprite, this.sty.data.palettes[remapInput.value]);
         }
     }
 
